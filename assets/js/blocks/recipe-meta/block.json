@@ -36,6 +36,16 @@
 			"source": "html",
 			"selector": ".rmb-recipe__meta-item-time .rmb-recipe__meta-item-value",
 			"default": ""
+		},
+		"showCleanup": {
+			"type": "boolean",
+			"default": true
+		},
+		"cleanup": {
+			"type": "string",
+			"source": "html",
+			"selector": ".rmb-recipe__meta-item-cleanup .rmb-recipe__meta-item-value",
+			"default": ""
 		}
 	},
 	"editorScript": "recipe-block",

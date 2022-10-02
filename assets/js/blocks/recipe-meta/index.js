@@ -25,9 +25,12 @@ registerBlockType( name, {
 			showDifficulty,
 			showServing,
 			showTime,
+			showCleanup,
+			cleanup,
 			time,
 		} = attributes;
-		const showingAny = showDifficulty || showServing || showTime;
+		const showingAny =
+			showDifficulty || showServing || showTime || showCleanup;
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a component.
 		const blockProps = useBlockProps( {
 			className: showingAny
@@ -59,6 +62,15 @@ registerBlockType( name, {
 							onChange={ () =>
 								setAttributes( {
 									showDifficulty: ! showDifficulty,
+								} )
+							}
+						/>
+						<ToggleControl
+							label="Show cleanup"
+							checked={ showCleanup }
+							onChange={ () =>
+								setAttributes( {
+									showCleanup: ! showCleanup,
 								} )
 							}
 						/>
@@ -126,6 +138,26 @@ registerBlockType( name, {
 									/>
 								</div>
 							) }
+							{ showCleanup && (
+								<div className="rmb-recipe__meta-item rmb-recipe__meta-item-cleanup">
+									<span className="rmb-recipe__meta-item-label">
+										{ __( 'Cleanup:', 'recipe-block' ) }
+									</span>
+									<RichText
+										placeholder={ __(
+											'Write cleanup…',
+											'recipe-block'
+										) }
+										className="rmb-recipe__meta-item-value"
+										onChange={ ( value ) =>
+											setAttributes( {
+												cleanup: value,
+											} )
+										}
+										value={ cleanup }
+									/>
+								</div>
+							) }
 						</>
 					) : (
 						<em>
@@ -147,6 +179,8 @@ registerBlockType( name, {
 			showServing,
 			showTime,
 			time,
+			showCleanup,
+			cleanup,
 		} = props.attributes; /* eslint-disable-line react/prop-types */
 		if ( ! showDifficulty && ! showServing && ! showTime ) {
 			return null;
@@ -190,6 +224,18 @@ registerBlockType( name, {
 						<RichText.Content
 							tagName="div"
 							value={ difficulty }
+							className="rmb-recipe__meta-item-value"
+						/>
+					</div>
+				) }
+				{ showCleanup && (
+					<div className="rmb-recipe__meta-item rmb-recipe__meta-item-cleanup">
+						<span className="rmb-recipe__meta-item-label">
+							{ __( 'Cleanup:', 'recipe-block' ) }
+						</span>
+						<RichText.Content
+							tagName="div"
+							value={ cleanup }
 							className="rmb-recipe__meta-item-value"
 						/>
 					</div>
